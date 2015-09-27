@@ -1,52 +1,63 @@
+#define IN1 3
+#define IN2 4
+#define IN3 5
+#define IN4 6
+
+uint8_t stepper_inputs[] = { IN1, IN2, IN3, IN4 };
+
 void setup() {
-  // put your setup code here, to run once:
-  pinMode(3, OUTPUT);
-  pinMode(4, OUTPUT);
-  pinMode(5, OUTPUT);
-  pinMode(6, OUTPUT);
+
+  for ( int i = 0; i < 4; i++ ) {
+    pinMode(stepper_inputs[i], OUTPUT);
+  }
+  
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
-  multi_step(3);
+  full_step(3);
 }
 
-int single_step(uint8_t delay_time) {
-  digitalWrite(3, HIGH);
-  delay(delay_time);
-  digitalWrite(3, LOW);
+int full_step(uint8_t delay_time) {
   
-  digitalWrite(4, HIGH);
-  delay(delay_time);
-  digitalWrite(4, LOW);
+    digitalWrite(IN1, HIGH);
+    delay(delay_time);
+    digitalWrite(IN1, LOW);
+  
+    digitalWrite(IN2, HIGH);
+    delay(delay_time);
+    digitalWrite(IN2, LOW);
 
-  digitalWrite(5, HIGH);
-  delay(delay_time);
-  digitalWrite(5, LOW);
+    digitalWrite(IN3, HIGH);
+    delay(delay_time);
+    digitalWrite(IN3, LOW);
 
-  digitalWrite(6, HIGH);
-  delay(delay_time);
-  digitalWrite(6, LOW);
+    digitalWrite(IN4, HIGH);
+    delay(delay_time);
+    digitalWrite(IN4, LOW);
+  
 }
 
-int multi_step(uint8_t delay_time) {
-  digitalWrite(3, HIGH);
-  digitalWrite(4, HIGH);
-  delay(delay_time);
-  digitalWrite(3, LOW);
+int half_step(uint8_t delay_time) {
   
-  digitalWrite(4, HIGH);
-  digitalWrite(5, HIGH);
+  digitalWrite(IN1, HIGH);
+  digitalWrite(IN2, HIGH);
   delay(delay_time);
-  digitalWrite(4, LOW);
+  digitalWrite(IN1, LOW);
+  
+  digitalWrite(IN2, HIGH);
+  digitalWrite(IN3, HIGH);
+  delay(delay_time);
+  digitalWrite(IN2, LOW);
 
-  digitalWrite(5, HIGH);
-  digitalWrite(6, HIGH);
+  digitalWrite(IN3, HIGH);
+  digitalWrite(IN4, HIGH);
   delay(delay_time);
-  digitalWrite(5, LOW);
+  digitalWrite(IN3, LOW);
 
-  digitalWrite(6, HIGH);
-  digitalWrite(3, HIGH);
+  digitalWrite(IN4, HIGH);
+  digitalWrite(IN1, HIGH);
   delay(delay_time);
-  digitalWrite(6, LOW);
+  digitalWrite(IN4, LOW);
+  
 }
